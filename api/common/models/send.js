@@ -51,6 +51,20 @@ module.exports = function(Send) {
     }
 
 
+    Send.prototype.retry = function(){
+        console.log("retry:" + this.id);
+        this.state = "pending";
+        producer.send([{
+            topic:'tasks',
+            messages:[JSON.stringify({ sendId: this.id })]
+        }],(err,res)=>{
+            console.log(this.id,res);
+        });
+        this.save();
+        return Promise.resolve(this);
+    }
+
+
 
     Send.observe('after save', function queueMail(ctx, next) {
         if(ctx.isNewInstance){
