@@ -24,7 +24,7 @@ module.exports = function(Send) {
         this.state = "error";
         this.response = error;
         producer.send([{
-            topic:'retry',
+            topic:'sendErrors',
             messages:[JSON.stringify({ sendId: this.id })]
         }],(err,res)=>{
             console.log(this.id,res);
