@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PROJECT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+docker exec -it growth_kafka_1 kafka-consumer-groups --bootstrap-server kafka:29092 --describe --group likerInterest
+

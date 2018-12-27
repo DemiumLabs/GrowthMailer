@@ -1,0 +1,3 @@
+#!/bin/bash
+docker exec -it ad1704f25405 kafka-topics --alter --zookeeper zookeeper:2181 --topic likers --partitions 60
+

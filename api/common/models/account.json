@@ -1,0 +1,52 @@
+{
+  "name": "Account",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "state": {
+      "type": "string",
+      "default": "available"
+    },
+    "lastSend": {
+      "type": "date",
+      "default": null
+    },
+    "reservatedAt": {
+      "type": "date",
+      "default": null
+    },
+    "reservationToken": {
+      "type": "string",
+      "default": null
+    },
+    "origin": {
+      "type": "string",
+      "required": true,
+      "default": "gmail"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "sends": {
+      "type": "hasMany",
+      "model": "Send",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

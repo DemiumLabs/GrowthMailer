@@ -1,0 +1,10 @@
+{
+    "name": "david/consumers",
+    "authors": [
+        {
+            "name": "David Pestana Perdomo",
+            "email": "david.pestana.perdomo@gmail.com"
+        }
+    ],
+    "require": {}
+}

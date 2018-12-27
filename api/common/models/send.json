@@ -1,0 +1,40 @@
+{
+  "name": "Send",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "state": {
+      "type": "string",
+      "default": "pending"
+    },
+    "response": {
+      "type": "string"
+    },
+    "to": {
+      "type": "Receiver"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "template": {
+      "type": "string",
+      "default": "default"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "account": {
+      "type": "belongsTo",
+      "model": "Account",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

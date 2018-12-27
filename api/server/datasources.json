@@ -1,0 +1,10 @@
+{
+  "db": {
+    "host": "mongo",
+    "port": 27017,
+    "database": "test",
+    "name": "db",
+    "connector": "mongodb",
+    "useNewUrlParser": "true"
+  }
+}
