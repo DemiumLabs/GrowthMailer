@@ -47,6 +47,7 @@ module.exports = function(Account) {
                     })
                     .catch((error)=>{
                         if(error.cause == 'sendInstance') sendInstance.setCrash(error); 
+                        else sendInstance.retry();
 
                         let solvedPromise = (error.cause == 'accountInstance') ? 
                             this.setCrash(error) : 
