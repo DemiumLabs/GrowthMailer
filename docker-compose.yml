@@ -9,7 +9,7 @@ services:
     build:
       context: ./services/
       dockerfile: ./Dockerfile
-    command: bash -c "cd src && tail -f"
+    command: bash -c "cd src && ping api"
     volumes:
       - ./services:/opt/app
     environment:
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./api:/usr/src/app
     ports:
-      - "3001:3000"
+      - "81:3000"
     links:
       - mongo
       - kafka
