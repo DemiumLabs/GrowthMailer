@@ -14,6 +14,24 @@ producer.on('ready', function () {});
 
 module.exports = function(Send) {
 
+    Send.blockEmailLag = function(email){
+        Send.find({where:{'to.email':email}}).then(sends=>{
+            sends.map(send=>{
+                send.state = 'blocked';
+                send.save();
+            })
+        });
+        return Promise.resolve('process started');
+    }
+
+    Send.remoteMethod('blockEmailLag', {
+        description: 'use this account to email pending send',
+        http: {path: '/blockEmailLag', verb: 'post'},
+        accepts: [
+            { arg:'email', type: 'string',required:true}
+        ],
+        returns: { root: 'true', type: 'string' }
+     });
 
     Send.prototype.getTemplate = function(){
         return Send.app.models.Template.findById("5c2519199f2521002852abc1");
@@ -77,4 +95,6 @@ module.exports = function(Send) {
             });
         }
     });
+
+
 };
