@@ -16,16 +16,20 @@ module.exports = function(Send) {
 
     Send.blockEmailLag = function(email){
         Send.find({where:{'to.email':email}}).then(sends=>{
-            sends.map(send=>{
-                send.state = 'blocked';
-                send.save();
+            sends
+            .map(send=>{
+                if(send.state =='pending'){
+                    send.state = 'blocked';
+                    send.save(); 
+                } 
+
             })
         });
         return Promise.resolve('process started');
     }
 
     Send.remoteMethod('blockEmailLag', {
-        description: 'use this account to email pending send',
+        description: 'block pendings sends to this email',
         http: {path: '/blockEmailLag', verb: 'post'},
         accepts: [
             { arg:'email', type: 'string',required:true}
