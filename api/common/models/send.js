@@ -24,7 +24,7 @@ module.exports = function(Send) {
         this.state = "error";
         this.response = error;
         producer.send([{
-            topic:'retry',
+            topic:'sendErrors',
             messages:[JSON.stringify({ sendId: this.id })]
         }],(err,res)=>{
             console.log(this.id,res);
@@ -48,6 +48,20 @@ module.exports = function(Send) {
         this.save();
         return Promise.resolve(this);
        // return this.save();
+    }
+
+
+    Send.prototype.retry = function(){
+        console.log("retry:" + this.id);
+        this.state = "pending";
+        producer.send([{
+            topic:'tasks',
+            messages:[JSON.stringify({ sendId: this.id })]
+        }],(err,res)=>{
+            console.log(this.id,res);
+        });
+        this.save();
+        return Promise.resolve(this);
     }
 
 
