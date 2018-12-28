@@ -26,7 +26,7 @@ services:
     build:
       context: .
       dockerfile: ./api/Dockerfile
-    command: bash -c "npm install && nodemon ."
+    command: bash -c "npm install && node ."
     volumes:
       - ./api:/usr/src/app
     ports:
