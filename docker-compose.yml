@@ -6,6 +6,7 @@ services:
     restart: always
     networks:
       - main
+      - mailer
     build:
       context: ./services/
       dockerfile: ./Dockerfile
@@ -20,6 +21,7 @@ services:
     restart: always
     networks:
       - main
+      - mailer
     depends_on:
       - mongo
       - kafka
@@ -41,6 +43,7 @@ services:
     image: mongo:latest
     networks:
       - main
+      - mailer
     image: mongo:latest
     environment:
       - MONGO_DATA_DIR=/data/db
@@ -60,7 +63,7 @@ services:
     restart: always
     image: confluentinc/cp-zookeeper:latest
     networks:
-      - main
+      - mailer
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -90,7 +93,7 @@ services:
     #
     image: confluentinc/cp-kafka:latest
     networks:
-      - main
+      - mailer
     depends_on:
       - zookeeper
     # ports:
@@ -103,5 +106,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 networks:
+    mailer:
+        external: false
     main:
-        external: true  
+        external: true
