@@ -16,7 +16,7 @@ module.exports = function(Send) {
 
 
     Send.prototype.getTemplate = function(){
-        return Send.app.models.Template.findById("5c25086fe0a7ed002b0f66fc");
+        return Send.app.models.Template.findById("5c2519199f2521002852abc1");
     }
 
     Send.prototype.setCrash = function(error){
