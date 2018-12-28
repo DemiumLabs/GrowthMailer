@@ -77,6 +77,7 @@ module.exports = function(Account) {
 
     Account.prototype.unlock = function(){
         this.state = "available";
+        this.error = null;
         return this.save();
     }
 
