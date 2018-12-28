@@ -9,7 +9,7 @@ services:
     build:
       context: ./services/
       dockerfile: ./Dockerfile
-    command: bash -c "cd src && tail -f"
+    command: bash -c "cd src && python sendMailOfTasks.py"
     volumes:
       - ./services:/opt/app
     environment:
