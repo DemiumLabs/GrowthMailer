@@ -87,6 +87,22 @@ module.exports = function(Send) {
     }
 
 
+    Send.retryPendings = function(){
+        Send.find({where:{state:"pending"}})
+        .then(sends=>{
+                console.log('sends',sends.length);
+                sends.map(send=>send.retry())
+        });
+        return Promise.resolve('launched');
+    }
+
+
+    Send.remoteMethod('retryPendings', {
+        description: 'put in tasks topic all pending sends',
+        http: {path: '/retryPendings', verb: 'post'},
+        returns: { root: 'true', type: 'string' }
+     });
+
 
     Send.observe('after save', function queueMail(ctx, next) {
         if(ctx.isNewInstance){
