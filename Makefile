@@ -3,3 +3,6 @@ topics:
 
 sendMail:
 	docker exec -it mailer_kafka kafka-consumer-groups --bootstrap-server kafka:29092 --describe --group sendMail
+
+restart:
+	docker restart mailer_services
