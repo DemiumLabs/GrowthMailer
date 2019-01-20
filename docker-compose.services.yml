@@ -7,7 +7,21 @@ services:
     build:
       context: ./services/
       dockerfile: ./Dockerfile
-    command: bash -c "cd src && python sendMailOfTasks.py"
+    command: bash -c "cd src && python while.py"
+    volumes:
+      - ./services:/opt/app
+    environment:
+      KAFKAURL: kafka:29092
+      APIURL: api:3000
+
+  mailer_services2:
+    image: mailer_services
+    container_name: mailer_services2
+    restart: always
+    build:
+      context: ./services/
+      dockerfile: ./Dockerfile
+    command: bash -c "cd src && python while.py"
     volumes:
       - ./services:/opt/app
     environment:
