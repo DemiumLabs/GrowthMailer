@@ -4,6 +4,8 @@ services:
     container_name: zookeeper
     restart: always
     image: confluentinc/cp-zookeeper:latest
+    networks:
+      - main
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -32,6 +34,8 @@ services:
     # "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-
     #
     image: confluentinc/cp-kafka:latest
+    networks:
+      - main    
     depends_on:
       - zookeeper
     # ports:
