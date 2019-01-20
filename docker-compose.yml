@@ -22,9 +22,9 @@ services:
     # networks:
     #   - main
     #   - mailer
-    depends_on:
-      - mongo
-      - kafka
+    # depends_on:
+    #   - mongo
+    #   - kafka
     build:
       context: .
       dockerfile: ./api/Dockerfile
@@ -33,9 +33,9 @@ services:
       - ./api:/usr/src/app
     ports:
       - "81:3000"
-    links:
-      - mongo
-      - kafka
+    # links:
+    #   - mongo
+    #   - kafka
     environment:
       KAFKA_URL: kafka:29092
   mongo:
