@@ -1,0 +1,15 @@
+version: "3.0"
+services:
+  mailer_services:
+    image: mailer_services
+    container_name: mailer_services
+    restart: always
+    build:
+      context: ./services/
+      dockerfile: ./Dockerfile
+    command: bash -c "cd src && python sendMailOfTasks.py"
+    volumes:
+      - ./services:/opt/app
+    environment:
+      KAFKAURL: kafka:29092
+      APIURL: api:3000
