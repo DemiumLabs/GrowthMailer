@@ -1,69 +1,9 @@
 version: "3.0"
 services:
-  mailer_services:
-    image: mailer_services
-    container_name: mailer_services
-    restart: always
-    networks:
-      - main
-      - mailer
-    build:
-      context: ./services/
-      dockerfile: ./Dockerfile
-    command: bash -c "cd src && python sendMailOfTasks.py"
-    volumes:
-      - ./services:/opt/app
-    environment:
-      KAFKAURL: kafka:29092
-      APIURL: api:3000
-  api:
-    container_name: mailer_api
-    restart: always
-    networks:
-      - main
-      - mailer
-    depends_on:
-      - mongo
-      - kafka
-    build:
-      context: .
-      dockerfile: ./api/Dockerfile
-    command: bash -c "npm install && node ."
-    volumes:
-      - ./api:/usr/src/app
-    ports:
-      - "81:3000"
-    links:
-      - mongo
-      - kafka
-    environment:
-      KAFKA_URL: kafka:29092
-  mongo:
-    container_name: mailer_mongo
-    image: mongo:latest
-    networks:
-      - main
-      - mailer
-    image: mongo:latest
-    environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
-    volumes:
-      - ./data/db:/data/db
-  # dkron:
-  #   container_name: dkron
-  #   image: dkron/dkron:latest
-  #   command: agent --server
-  #   ports:
-  #     - 8080:8080
-  #   volumes:
-  #     - ./data/dkron.db:/dkron.db
   zookeeper:
     container_name: mailer_zookeeper
     restart: always
     image: confluentinc/cp-zookeeper:latest
-    networks:
-      - mailer
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -92,8 +32,6 @@ services:
     # "`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-'"`-._,-
     #
     image: confluentinc/cp-kafka:latest
-    networks:
-      - mailer
     depends_on:
       - zookeeper
     # ports:
@@ -105,8 +43,3 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-networks:
-    mailer:
-        external: false
-    main:
-        external: true
