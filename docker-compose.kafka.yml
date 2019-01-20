@@ -1,14 +1,14 @@
 version: "3.0"
 services:
   zookeeper:
-    container_name: mailer_zookeeper
+    container_name: zookeeper
     restart: always
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
   kafka:
-    container_name: mailer_kafka
+    container_name: kafka
     restart: always
     volumes:
       - ./data/kafka:/var/lib/kafka/data
