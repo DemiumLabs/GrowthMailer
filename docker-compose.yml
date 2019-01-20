@@ -1,11 +1,16 @@
 version: "3.0"
+networks:
+    main:
+        external: true
 services:
   api:
     container_name: mailer_api
     restart: always
+    networks:
+      - main
     build:
-      context: .
-      dockerfile: ./api/Dockerfile
+      context: ./api/
+      dockerfile: ./Dockerfile
     command: bash -c "npm install && node ."
     volumes:
       - ./api:/usr/src/app
@@ -16,7 +21,8 @@ services:
   mongo:
     container_name: mailer_mongo
     image: mongo:latest
-    image: mongo:latest
+    networks:
+      - main
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null

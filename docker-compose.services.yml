@@ -1,7 +1,12 @@
 version: "3.0"
+networks:
+    main:
+        external: true
 services:
   mailer_services:
     image: mailer_services
+    networks:
+      - main
     container_name: mailer_services
     restart: always
     build:
@@ -16,6 +21,8 @@ services:
 
   mailer_services2:
     image: mailer_services
+    networks:
+      - main
     container_name: mailer_services2
     restart: always
     build:
