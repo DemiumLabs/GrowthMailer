@@ -9,6 +9,9 @@ requestTimeout: 100});
 
 const producer = new kafka.Producer(client);
 producer.on('ready', function () {});
+producer.on('error', function(error) {
+    console.log('Error received from kafka: ' + error);
+  });
 
 
 
