@@ -1,7 +1,7 @@
 'use strict';
 const realuserMailer = require('../../lib/realuser-mailer');
 
-const MINIMUM_AVAILABILITY_TIME = 5 * 60 * 1000;  // 5 minutes in miliseconds 
+const MINIMUM_AVAILABILITY_TIME = 15 * 60 * 1000;  // 15 minutes in miliseconds 
 const MAXIMUM_RESERVATION_TIME  =  2 * 1000; // 2 second
 const MAXIMUM_BUSY_TIME  =  60 * 1000; // 60 seconds
 
