@@ -53,7 +53,7 @@ module.exports = function(Account) {
                         //     this.setCrash(error) : 
                         //     this.unlock();
 
-                        this.setCrash(error);
+                        let solvedPromise = this.setCrash(error);
 
                         solvedPromise
                             .then(()=>reject(error))
