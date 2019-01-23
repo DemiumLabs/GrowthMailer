@@ -52,7 +52,8 @@ module.exports = function(Account) {
                         // let solvedPromise = (error.cause == 'accountInstance') ? 
                         //     this.setCrash(error) : 
                         //     this.unlock();
-
+                        console.log('############  -  BLOCK ACCOUNT INSTANCE')
+                    
                         let solvedPromise = this.setCrash(error);
 
                         solvedPromise
